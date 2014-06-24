@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.StringReader;
 
+import static utils.Helper.notBlank;
+
 public class ScalaCodeRunner {
 
     public static final int WRONG_RESULT = 444;
@@ -30,6 +32,10 @@ public class ScalaCodeRunner {
     private File submitDir;
 
     public ScalaCodeRunner(String username, String problemId, String code) {
+        notBlank(username, "username");
+        notBlank(problemId, "problemId");
+        notBlank(code, "code");
+
         this.username = username;
         this.problemId = problemId;
         this.code = code;
