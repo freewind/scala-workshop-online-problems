@@ -126,11 +126,18 @@ public class UserSubmitManager {
         for (String problemId : problemDirs) {
             List<SubmitResult> submitResults = get(username, problemId);
             for (SubmitResult result : submitResults) {
-                if (result.isPassed()) {
+                if (result.isPassed() && !ids.contains(result.problemId)) {
                     ids.add(result.problemId);
                 }
             }
         }
+
+        Collections.sort(ids, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return Integer.parseInt(o1) - Integer.parseInt(o2);
+            }
+        });
         return ids;
     }
 }
