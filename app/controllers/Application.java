@@ -1,5 +1,6 @@
 package controllers;
 
+import coderunner.AnswerCodeGenerator;
 import coderunner.ScalaCodeRunner;
 import coderunner.SubmitResult;
 import models.*;
@@ -123,6 +124,11 @@ public class Application extends Controller {
         String username = getSessionUsername();
         userSubmitManager.deleteSubmit(username, problemId, submitId);
         showProblem(problemId, "");
+    }
+
+    public static void previewAnswerCode(String problemId, String userCode) throws IOException {
+        String code = new AnswerCodeGenerator(problemId, userCode).generate();
+        render(problemId, code);
     }
 
     public static void showDemo() {

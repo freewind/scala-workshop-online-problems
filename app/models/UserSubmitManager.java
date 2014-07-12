@@ -29,9 +29,11 @@ public class UserSubmitManager {
         }
 
         for (File submitDir : files) {
-            File resultFile = new File(submitDir, "result.json");
-            SubmitResult result = new Gson().fromJson(FileUtils.readFileToString(resultFile, "UTF-8"), SubmitResult.class);
-            results.add(result);
+            if (submitDir.isDirectory()) {
+                File resultFile = new File(submitDir, "result.json");
+                SubmitResult result = new Gson().fromJson(FileUtils.readFileToString(resultFile, "UTF-8"), SubmitResult.class);
+                results.add(result);
+            }
         }
 
         sortFromNewToOld(results);

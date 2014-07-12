@@ -10,8 +10,7 @@ public class Problem {
 
     public String id;
     public String content;
-    public String input;
-    public String output;
+    public String validation;
 
     public String getTitle() {
         try {

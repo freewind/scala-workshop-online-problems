@@ -12,11 +12,12 @@
     <input type="hidden" name="problemId" value="${problem.id}"/>
 
     <div>
-        <textarea name="code" rows="20" cols="80">${code}</textarea>
+        <textarea id="userCode" name="code" rows="20" cols="80">${code}</textarea>
     </div>
     <div><input type="submit"/></div>
     <div>
-        <li><a href="@{Application.showDemo}" target="_blank">查看样例：类名要求，如何读取输入，如何输出</a></li>
+        <li><a href="#" onclick="previewAnswerCode();return false;">预览最终代码</a></li>
+        <li><a href="@{Application.showDemo}" target="_blank">查看程序使用的完整代码模板</a></li>
         <li>注意：千万不要提交有可能破坏服务器的代码，如删除文件，重启什么的，因为没有对代码进行限制</li>
     </div>
 </form>
@@ -37,3 +38,20 @@
     <a href="@{Application.deleteSubmit(problem.id, submit.id)}" onclick="return confirm('Are you sure to delete?')">delete</a>
 </div>
 #{/list}
+
+<script type="application/javascript">
+    function previewAnswerCode() {
+        $.post("@{Application.previewAnswerCode}", {
+            problemId: ${problem.id},
+            userCode: $("#userCode").text()
+        }, function (data) {
+            var win=window.open('about:blank');
+            with(win.document)
+            {
+                open();
+                write(data);
+                close();
+            }
+        });
+    }
+</script>

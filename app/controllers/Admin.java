@@ -31,12 +31,11 @@ public class Admin extends Controller {
         render(problem);
     }
 
-    public static void addOrUpdateProblem(String problemId, String content, String input, String output) throws IOException {
+    public static void addOrUpdateProblem(String problemId, String content, String validation) throws IOException {
         Problem problem = new Problem();
         problem.id = problemId;
         problem.content = content;
-        problem.input = input;
-        problem.output = output;
+        problem.validation = validation;
         if (StringUtils.isBlank(problem.id)) {
             problemManager.add(problem);
             flash("message", "更新成功");

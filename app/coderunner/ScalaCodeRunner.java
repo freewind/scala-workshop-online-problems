@@ -4,14 +4,10 @@ import com.google.gson.Gson;
 import models.Problem;
 import models.ProblemManager;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
 import play.Play;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.StringReader;
 
 import static utils.Helper.notBlank;
 
@@ -26,19 +22,19 @@ public class ScalaCodeRunner {
     public static final int MAX_RUNNING_SECONDS = 10;
     private String username;
     private String problemId;
-    private String code;
+    private String userCode;
     private File codeFile;
     private long submitTime;
     private File submitDir;
 
-    public ScalaCodeRunner(String username, String problemId, String code) {
+    public ScalaCodeRunner(String username, String problemId, String userCode) {
         notBlank(username, "username");
         notBlank(problemId, "problemId");
-        notBlank(code, "code");
+        notBlank(userCode, "userCode");
 
         this.username = username;
         this.problemId = problemId;
-        this.code = code;
+        this.userCode = userCode;
         this.submitTime = System.currentTimeMillis();
         this.submitId = this.submitTime;
     }
@@ -47,9 +43,7 @@ public class ScalaCodeRunner {
         submitDir = new File(userSubmitsDir, username + "/" + problemId + "/" + submitId);
         submitDir.mkdirs();
 
-        codeFile = new File(submitDir, "app.scala");
-
-        FileUtils.writeStringToFile(codeFile, code);
+        generateUserAnswerFile();
 
         // compile
         ProcessBuilder pb = new ProcessBuilder("scalac", codeFile.getAbsolutePath());
@@ -72,6 +66,11 @@ public class ScalaCodeRunner {
         return result;
     }
 
+    private void generateUserAnswerFile() throws IOException {
+        codeFile = new File(submitDir, "app.scala");
+        FileUtils.writeStringToFile(codeFile, new AnswerCodeGenerator(problemId, userCode).generate());
+    }
+
 
     private void saveResult(SubmitResult result) throws IOException {
         String json = new Gson().toJson(result);
@@ -87,7 +86,7 @@ public class ScalaCodeRunner {
         submitResult.username = username;
         submitResult.submitTime = submitTime;
         submitResult.message = FileUtils.readFileToString(logFile);
-        submitResult.code = code;
+        submitResult.userCode = userCode;
         return submitResult;
     }
 
@@ -99,34 +98,12 @@ public class ScalaCodeRunner {
         pb.redirectOutput(ProcessBuilder.Redirect.appendTo(logFile));
         Process p = pb.start();
 
-        OutputStream outputStream = p.getOutputStream();
-        IOUtils.copy(new StringReader(problem.input), outputStream);
-        outputStream.close();
-
         new KillTimeoutProcess(p, MAX_RUNNING_SECONDS).start();
 
         int exitValue = p.waitFor();
 
-        if (exitValue == 0) {
-            boolean notSameOutput = checkOutput(problem, logFile);
-            if (notSameOutput) {
-                exitValue = WRONG_RESULT;
-            }
-        }
-
         return createResult(logFile, exitValue, determineResultWhenRun(exitValue));
     }
-
-    private boolean checkOutput(Problem problem, File logFile) throws IOException {
-        String expectedOutput = normallizeLineSeparators(problem.output.trim());
-        String realOutput = normallizeLineSeparators(FileUtils.readFileToString(logFile, "UTF-8").trim());
-        return !StringUtils.equals(expectedOutput, realOutput);
-    }
-
-    private String normallizeLineSeparators(String trim) {
-        return StringUtils.replace(trim, "\r", "");
-    }
-
 
     private String determineResultWhenCompile(int exitValue) {
         if (exitValue == 1) {

@@ -16,8 +16,7 @@ import static org.apache.commons.io.FileUtils.readFileToString;
 public class ProblemManager {
 
     public static final String PROBLEM_FILENAME = "problem.txt";
-    public static final String INPUT_FILENAME = "input.txt";
-    public static final String OUTPUT_FILENAME = "output.txt";
+    public static final String VALIDATION_FILENAME = "validation.txt";
     private String root = Play.configuration.getProperty("problems.dir");
 
     public List<Problem> getAll() throws IOException {
@@ -31,8 +30,7 @@ public class ProblemManager {
             Problem problem = new Problem();
             problem.id = problemDir.getName();
             problem.content = readFile(problemDir, PROBLEM_FILENAME);
-            problem.input = readFile(problemDir, INPUT_FILENAME);
-            problem.output = readFile(problemDir, OUTPUT_FILENAME);
+            problem.validation = readFile(problemDir, VALIDATION_FILENAME);
             problems.add(problem);
         }
 
@@ -79,8 +77,7 @@ public class ProblemManager {
         problemDir.mkdirs();
 
         FileUtils.writeStringToFile(new File(problemDir, PROBLEM_FILENAME), problem.content, "UTF-8");
-        FileUtils.writeStringToFile(new File(problemDir, INPUT_FILENAME), problem.input, "UTF-8");
-        FileUtils.writeStringToFile(new File(problemDir, OUTPUT_FILENAME), problem.output, "UTF-8");
+        FileUtils.writeStringToFile(new File(problemDir, VALIDATION_FILENAME), problem.validation, "UTF-8");
     }
 
     public void update(Problem problem) throws IOException {

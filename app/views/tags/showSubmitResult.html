@@ -1,9 +1,9 @@
 <div>用户名: ${_submit.username}, 时间：${_submit.submitTimeFormatted}</div>
 <div>
-    <pre class="code">${_submit.code}</pre>
+    <pre class="code">${_submit.userCode}</pre>
 </div>
 <div>ExitValue: ${_submit.exitValue}, 结果：${_submit.result}</div>
 <div>日志：
     <pre>${_submit.message}</pre>
 </div>
-<div><a href="@{Application.showProblem(_submit.problemId, _submit.code)}">Edit this code</a></div>
+<div><a href="@{Application.showProblem(_submit.problemId, _submit.userCode)}">Edit this code</a></div>
