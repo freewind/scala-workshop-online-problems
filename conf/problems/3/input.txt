@@ -1,2 +1,0 @@
-2011-01-02 user Jack visited page: /hello/scala
-2011-01-03 user Steven Paul Jobs visited page: /i/like/apples

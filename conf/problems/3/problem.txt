@@ -4,15 +4,12 @@
 2011-01-02 user Jack visited page: /hello/scala
 2011-01-03 user Steven Paul Jobs visited page: /i/like/apples
 
-从中读取用户名称和访问的页面，输出格式见示例。
-建议使用正则表达式提取。
+实现以下函数，可从一行日志文本中提取到指定的信息
 
-输入：
+def extract(line:String):(String, String)
 
-2011-01-02 user Jack visited page: /hello/scala
-2011-01-03 user Steven Paul Jobs visited page: /i/like/apples
+建议使用正则表达式
 
-输出：
+测试用例：
 
-Jack --> /hello/scala
-Steven Paul Jobs --> /i/like/apples
+extract("2011-01-02 user Jack visited page: /hello/scala") == ("Jack", "/hello/scala")

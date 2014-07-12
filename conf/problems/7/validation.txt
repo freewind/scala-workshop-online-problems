@@ -1,0 +1,15 @@
+myConvert(1 ) === -22
+myConvert(8 ) === -36
+myConvert(15) === -20
+myConvert(22) === -64
+myConvert(29) === -78
+myConvert(36) === -62
+myConvert(43) === -106
+myConvert(50) === -120
+myConvert(57) === -104
+myConvert(64) === -148
+myConvert(71) === -162
+myConvert(78) === -146
+myConvert(85) === -190
+myConvert(92) === -204
+myConvert(99) === -188

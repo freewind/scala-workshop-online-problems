@@ -1,2 +1,0 @@
-Jack --> /hello/scala
-Steven Paul Jobs --> /i/like/apples

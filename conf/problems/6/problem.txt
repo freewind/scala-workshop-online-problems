@@ -52,5 +52,7 @@ trait NegativeConverter extends Converter {
 -30
 -2
 
-请猜测规则，并可对更多的数字进行转换
+请猜测规则，实现以下函数：
+
+def myConvert(n:Int):Int
 

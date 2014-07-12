@@ -1,0 +1,3 @@
+extract("2011-01-02 user Jack visited page: /hello/scala") === ("Jack", "/hello/scala")
+extract("2011-01-03 user Steven Paul Jobs visited page: /i/like/apples") === ("Steven Paul Jobs", "/i/like/apples")
+
