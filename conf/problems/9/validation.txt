@@ -1,0 +1,10 @@
+add(3, 5) === 8
+sum(List(1,3,4)) === 8
+length(List(1,5,2)) === 3
+map(List(1,2,3), (i:Int)=> i+10) === List(11, 12, 13)
+filter(List(1,2,3), (i:Int)=> i>1) === List(2, 3)
+append(List(1,2), List(3, 4)) ===  List(1, 2, 3, 4)
+concat(List(List(1,2), List(3,4))) === List(1, 2, 3, 4)
+concatMap(List(1,2), (i:Int) => List(i+10, i+20)) === List(11, 21, 12, 22)
+maximum(List(4,2,6)) === 6
+reverse(List(1,2,3)) ===  List(3, 2, 1)

@@ -1,0 +1,46 @@
+(***) 利用模式匹配实现对List的各种操作
+
+补全以下代码，使得各函数都可以正常工作：
+
+def succ(n: Int) = n + 1
+def pred(n: Int) = n - 1
+
+def add(x: Int, y: Int): Int = error("todo: Assume x and y are 0 or positive. Do not use + or - on Int. Only permitted to use succ/pred (above).")
+
+def sum(x: List[Int]): Int = error("todo")
+
+def length[A](x: List[A]): Int = error("todo")
+
+def map[A, B](x: List[A], f: A => B): List[B] = error("todo")
+
+def filter[A](x: List[A], f: A => Boolean): List[A] = error("todo")
+
+def append[A](x: List[A], y: List[A]): List[A] = error("todo")
+
+def concat[A](x: List[List[A]]): List[A] = error("todo")
+
+def concatMap[A, B](x: List[A], f: A => List[B]): List[B] = error("todo")
+
+def maximum(x: List[Int]): Int = error("todo")
+
+def reverse[A](x: List[A]): List[A] = error("todo")
+
+
+--------------------------------------------
+
+注意事项（请认真阅读）：
+
+1. 不要使用以下scala内置的方法或函数，尽量只使用pattern-matching和`::`等基本操作：
+  - 加法
+  - length
+  - map
+  - filter
+  - ::: 或 ++
+  - flatten
+  - flatMap
+  - reverse
+  - for表达式
+  - foldLeft/foldRight
+
+2. 本站功能已升级，不需要处理输入输出，直接实现以上函数即可
+    
