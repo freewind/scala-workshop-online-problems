@@ -86,7 +86,7 @@ public class ScalaCodeRunner {
         submitResult.username = username;
         submitResult.submitTime = submitTime;
         submitResult.message = FileUtils.readFileToString(logFile);
-        submitResult.userCode = userCode;
+        submitResult.code = userCode;
         return submitResult;
     }
 

@@ -6,7 +6,7 @@ public class SubmitResult {
 
     public String id;
     public int exitValue;
-    public String userCode;
+    public String code;
     public String problemId;
     public String message;
     public String username;
