@@ -3,3 +3,4 @@ scala-workshop.ipr
 scala-workshop.iws
 logs/
 target/
+tmp/
