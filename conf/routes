@@ -10,6 +10,10 @@
 
 GET     /                                       Application.index
 
+GET     /diagnostic/app-name                    Diagnostic.appName
+
+GET     /diagnostic/{action}                    Diagnostic.{action}
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
