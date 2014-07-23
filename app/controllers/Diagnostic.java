@@ -14,4 +14,10 @@ public class Diagnostic extends Controller {
       String appName = Play.configuration.get("application.name").toString();
       renderText(appName);
     }
+
+    public static void ping()  {
+      renderText("OK");
+    }
+
+
 }
